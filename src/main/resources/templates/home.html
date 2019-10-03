@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+</head>
+
+<body>
+<h1>Aplikacja do tworzenia nowych zadań do wykonania.</h1>
+<a href="/add">Dodaj pozycję</a><br/>
+<span>
+    <a href="/" text="Wszystkie">Wszystkie</a>
+</span><br/>
+<span th:each="complited: ${T(pl.javastart.todo.entity.TaskComplited).values()}">
+    <a th:href="|/?complited=${complited.name()}|" th:text="${complited.displayName}"></a>
+    <br/>
+</span>
+
+<ul>
+    <p>Dodane zadania: </p>
+    <li th:each="task: ${tasks}">
+       <a th:href="|/zadanie?id=${task.ID}|" th:text="${task.title}"></a>
+    </li>
+</ul>
+
+<form th:action="@{/add}" method = "post" th:object="${taskToDo}" >
+    <p>Podaj tytuł zadania</p><br/>
+    <input type="text" th:field="*{title}" placeholder="Tytuł zadania"/><br/>
+    <p>Opis zadania</p>
+    <textarea th:field="*{description}" placeholder="Opis zadania"/> <br/>
+    <p>Podaj termin wykonania zadania</p><br/>
+    <input type="date" th:field="*{taskTerm}" placeholder="Data wykonania"/><br/>
+    <p>Czy zostało wykonane?</p><br/>
+    <select th:field="*{complited}">
+        <option th:each="complited: ${T(pl.javastart.todo.entity.TaskComplited).values()}"
+                th:text="${complited.displayName}"
+                th:value="${complited.name()}"></option>
+    </select><br/>
+    <input type="submit" value="Dodaj zadanie"/> <br/>
+</form>
+</body>
+</html>

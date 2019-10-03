@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+</head>
+
+<body>
+<h2 th:text="${task.title}"></h2>
+<p th:text="|Termin wykonania: ${task.taskTerm}|"></p>
+<p th:text="${task.description}"></p>
+<p th:text="|Czy wykonany: ${task.complited.getDisplayName()}|"></p>
+<br/>
+
+<h3><a href="/">Powrót</a></h3>
+
+</body>
+</html>

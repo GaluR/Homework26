@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/add}" method = "post" th:object="${addTask}" >
+    <p>Podaj tytuł zadania</p><br/>
+    <input type="text" th:field="*{title}" placeholder="Tytuł zadania"/><br/>
+    <p>Opis zadania</p>
+    <textarea th:field="*{description}" placeholder="Opis zadania"/> <br/>
+    <p>Podaj termin wykonania zadania</p><br/>
+    <input type="date" th:field="*{taskTerm}" placeholder="Data wykonania"/><br/>
+    <p>Czy zostało wykonane?</p><br/>
+    <select th:field="*{complited}">
+        <option th:each="complited: ${T(pl.javastart.todo.entity.TaskComplited).values()}"
+                th:text="${complited.displayName}"
+                th:value="${complited.name()}"></option>
+    </select><br/>
+    <input type="submit" value="Dodaj zadanie"/> <br/>
+</form>
+
+</body>
+</html>
